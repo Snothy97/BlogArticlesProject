@@ -1,0 +1,147 @@
+{% extends 'blog_index.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- Start of Form -->
+             
+            <form method="POST" action="{% url 'update_profile' %}">
+              {% csrf_token %}
+              <p class="text-sm font-weight-bold">User Information</p>
+              <div class="row">
+               
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-first-name" class="form-control-label">First name</label>
+                    <input class="form-control form-control-sm" type="text" value="{{ user.first_name }}">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-last-name" class="form-control-label">Last name</label>
+                    <input class="form-control form-control-sm" type="text" value="{{ user.last_name }}">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-email-address" class="form-control-label">Email address</label>
+                    <input class="form-control form-control-sm" type="email" value="{{ user.email }}">
+                  </div>
+                </div>
+              </div>
+
+              <br>
+              <p class="text-sm font-weight-bold">Profile Information</p>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-phone-number" class="form-control-label">Phone Number</label>
+                    <input class="form-control form-control-sm" type="text" name="phone_number" value="{{ profile.phone_number }}" >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-suburb" class="form-control-label">Suburb</label>
+                    <input class="form-control form-control-sm" type="text" name="suburb" value="{{ profile.suburb }}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-street-address" class="form-control-label">Street address</label>
+                    <input class="form-control form-control-sm" type="text" name="street_address" value="{{ profile.street_address }}">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-city" class="form-control-label">City</label>
+                    <input class="form-control form-control-sm" type="text" name="city" value="{{ profile.city }}">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-postal-code" class="form-control-label">Postal code</label>
+                    <input class="form-control form-control-sm" type="text" name="postal_code" value="{{ profile.postal_code }}" maxlength="4">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="for-province" class="form-control-label">Province</label>
+                    <select class="form-control form-control-sm" name="province" required>
+                      <option value="" disabled selected hidden>Select province</option>
+                      <p>Province: {{ profile.province}}</p>
+                      {% for province in provinces %}
+                        <option value="{{ province.id }}" {% if province.id == profile.province %} selected {% endif %}>{{ province.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <p class="text-sm font-weight-bold">Identification Information</p>
+
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group">
+                          <label class="form-control-label">Select ID Type</label><br>
+                          <input type="radio" name="id_type" id="id_type_id" value="id" {% if profile.id_number %}checked{% endif %}>
+                          <label for="id_type_id">ID Number</label>
+              
+                          <input type="radio" name="id_type" id="id_type_passport" value="passport" {% if profile.passport_number %}checked{% endif %}>
+                          <label for="id_type_passport">Passport Number</label>
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="row" id="passport_number_container" style="display: none;">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="passport_number" class="form-control-label">Passport Number</label>
+                          <input class="form-control form-control-sm" type="text" name="passport_number" value="{{ profile.passport_number }}">
+                      </div>
+                  </div>
+              </div>
+              
+              <div class="row" id="id_number_container" style="display: none;">
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="id_number" class="form-control-label">ID Number</label>
+                          <input class="form-control form-control-sm" type="text" name="id_number" value="{{ profile.id_number }}" maxlength="13">
+                      </div>
+                  </div>
+              </div>
+              
+
+
+              <!-- Update Button -->
+              <div class="d-flex justify-content-end mt-3">
+                <button id="update_button" class="btn btn-primary" type="submit">Update</button>
+              </div>
+            </form>
+            <!-- End of Form -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+  var profileData = {
+    idNumber: "{{ profile.id_number|default_if_none:'' }}",
+    passportNumber: "{{ profile.passport_number|default_if_none:'' }}"
+  };
+
+</script>
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock javascript %}

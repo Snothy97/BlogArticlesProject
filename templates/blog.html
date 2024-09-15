@@ -1,0 +1,66 @@
+{% extends 'blog_index.html' %}
+{% load static %}
+{% block content %}
+
+
+    <div class="container-fluid">
+        <div class="jumbotron jumbotron-fluid">
+            <h1>{{ title }}</h1>
+            <p>{{ content }}</p>
+        </div>
+
+   
+    </div>
+
+    <!-- Main Content -->
+   
+        <!-- Image Grid -->
+
+        <div class="row ">
+        
+            <div class="col">
+                <img src="/static/images/ball.jpg" alt="Image 1" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <img src="/static/images/bird.jpg" alt="Image 2" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <img src="/static/images/nature3.jpg" alt="Image 3" class="img-thumbnail">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img src="/static/images/nature-photography.jpg" alt="Image 4" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <img src="/static/images/nature2.jpg" alt="Image 5" class="img-thumbnail" >
+            </div>
+            <div class="col">
+                <img src="/static/images/nature1.jpg" alt="Image 6"class="img-thumbnail">
+            </div>
+        </div>
+   
+        <!-- Blog Content -->
+         <div class="container">
+            <h1>Nature Quotes</h1>
+            <p class="lead">"Nature is not a place to visit, it is home." – 
+                Gary Snyder</p>
+            <blockquote class="blockquote">
+            <p>"Look deep into nature, and then you will understand everything better."</p>
+            <footer class="blackquote-footer">Sinothando Myeni - 2024 </footer>
+            </blockquote>
+        </div>    
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; My Website 2024</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+{%endblock%}
